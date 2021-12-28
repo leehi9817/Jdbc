@@ -5,11 +5,17 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class BookSelectAll {
 
 	public static void main(String[] args) {
 
+		List<AllVo> allList = new ArrayList();
+		
+		//책, 작가 데이터 가져오기
+		
 		// 0. import java.sql.*;
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -54,7 +60,16 @@ public class BookSelectAll {
 				String authorName = rs.getString("author_name");
 				String authorDesc = rs.getString("author_desc");
 				
-				System.out.println(bookId + ", " + bookTitle + ", " + bookPubs + ", " + bookPubDate + ", " + authorId + ", " + authorName + ", " + authorDesc);
+				AllVo vo = new AllVo(bookId, bookTitle, bookPubs, bookPubDate, authorId, authorName, authorDesc);
+				allList.add(vo);
+				
+				//System.out.println(bookId + ", " + bookTitle + ", " + bookPubs + ", " + bookPubDate + ", " + authorId + ", " + authorName + ", " + authorDesc);
+			}
+			
+			//출력
+			for(int i=0; i<allList.size(); i++) {
+				AllVo allVo = allList.get(i);
+				System.out.println(allVo.getBookId() + ", " + allVo.getBookTitle() + ", " + allVo.getBookPubs() + ", " + allVo.getBookPubDate() + ", " +allVo.getAuthorId() + ", " +allVo.getAuthorName() + ", " +allVo.getAuthorDesc());
 			}
 			
 		} catch (ClassNotFoundException e) {
