@@ -5,11 +5,17 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class BookSelect {
 
 	public static void main(String[] args) {
 
+		List<BookVo> bookList = new ArrayList();
+		
+		//책 데이터 가져오기
+		
 		// 0. import java.sql.*;
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -57,7 +63,16 @@ public class BookSelect {
 				String bookPubDate = rs.getString(4);
 				int authorId = rs.getInt(5);
 				
-				System.out.println(bookId + ", " + bookTitle + ", " + bookPubs + ", " + bookPubDate + ", " + authorId);
+				BookVo vo = new BookVo(bookId, bookTitle, bookPubs, bookPubDate, authorId);
+				bookList.add(vo);
+				
+				//System.out.println(bookId + ", " + bookTitle + ", " + bookPubs + ", " + bookPubDate + ", " + authorId);
+			}
+			
+			//출력
+			for(int i=0; i<bookList.size(); i++) {
+				BookVo bookVo = bookList.get(i);
+				System.out.println(bookVo.getBookId() + ", " + bookVo.getBookTitle() + ", " + bookVo.getBookPubs() + ", " + bookVo.getBookPubDate() + ", " + bookVo.getAuthorId());
 			}
 			
 		} catch (ClassNotFoundException e) {
