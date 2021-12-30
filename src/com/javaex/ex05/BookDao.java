@@ -211,12 +211,12 @@ public class BookDao {
 				int bookId = rs.getInt("book_id");
 				String title = rs.getString("title");
 				String pubs = rs.getString("pubs");
-				String pub_date = rs.getString("pub_date");
+				String pubDate = rs.getString("pub_date");
 				int authorId = rs.getInt("author_id");
 				String authorName = rs.getString("author_name");
 				String authorDesc = rs.getString("author_desc");
 
-				BookVo vo = new BookVo(bookId, title, pubs, pub_date, authorId, authorName, authorDesc);
+				BookVo vo = new BookVo(bookId, title, pubs, pubDate, authorId, authorName, authorDesc);
 				bookList.add(vo);
 
 			}
